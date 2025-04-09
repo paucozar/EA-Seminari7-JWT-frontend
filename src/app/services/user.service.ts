@@ -22,9 +22,7 @@ export class UserService {
     })
       ... get(apiURL, {headers: httpHeaders})
     */
-    return this.http.get<User[]>(this.apiUrl).pipe(
-      catchError(this.handleError<User[]>('getUsers', [])) // Retorna un array vacío si hay error
-    );
+    return this.http.get<User[]>(this.apiUrl);
   }
 
   getUser(id: number): Observable<User> {

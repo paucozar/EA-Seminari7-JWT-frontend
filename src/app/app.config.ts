@@ -5,14 +5,16 @@ import { provideHttpClient, HTTP_INTERCEPTORS, withInterceptors } from '@angular
 import { jwtInterceptor } from './services/auth.interceptor'; // Importa tu interceptor
 import { provideToastr, ToastrModule } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { TokenInterceptor } from './services/token.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}, // Añade tu interceptor aquí
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([ jwtInterceptor ])
+      withInterceptors([jwtInterceptor]) // Añade tu interceptor aquí
     ),
     provideAnimations(), //Requerido por ngx-toastr
     provideToastr({

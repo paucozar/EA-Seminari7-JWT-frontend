@@ -29,16 +29,16 @@ export class ColaboradoresComponent {
 
   //Función que se usa cuando se hace click a listar usuarios
   async obtenerUsuarios() {
-
+    console.log("Iniciando la peticion get a la API de usuarios");
     //Usa getUsers() del servicio UserService para hacer la peticion get a la API de todos los usuarios
     this.userService.getUsers().subscribe({
       next: (users) => {
+        console.log("Usuarios obtenidos de la API:", users);
         //se añaden los usuarios recibidos por la peticion getUsers() a la lista de usuarios
         this.users = users;
-        console.log(this.users);
         //se añade el usuario recibido del componente usuario a la lista de usuarios
         this.users.push(this.usuario);
-        console.log(this.users);
+        console.log('Lista de usuarios:', this.users);
       },
       error: (error) => {
         console.error('Error al obtener usuarios:', error);
